@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.Controller">
+   <tabs>
+      <Tab closable="false" text="Overview">
+         <content>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+               <children>
+                  <SplitPane dividerPositions="0.34958217270194986" orientation="VERTICAL" prefHeight="720.0" prefWidth="1280.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="1280.0">
+                           <children>
+                              <GridPane layoutX="-1.0" layoutY="-2.0" prefHeight="250.0" prefWidth="1280.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <ComboBox fx:id="students" prefHeight="30.0" prefWidth="300.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Student" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <GridPane.margin>
+                                          <Insets bottom="60.0" right="215.0" />
+                                       </GridPane.margin>
+                                       <font>
+                                          <Font name="Roboto Regular" size="24.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="courses" layoutX="74.0" layoutY="120.0" prefHeight="30.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Text layoutX="74.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Roboto Regular" size="24.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="60.0" right="225.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="271.0" prefWidth="426.0" GridPane.columnIndex="2">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                             <children>
+                                                <Button fx:id="getStudent" alignment="CENTER" layoutX="112.0" layoutY="41.0" mnemonicParsing="false" onAction="#fetchStudent" prefHeight="40.0" prefWidth="200.0" text="Show student" textAlignment="JUSTIFY">
+                                                   <font>
+                                                      <Font name="Roboto Regular" size="18.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="424.0">
+                                             <children>
+                                                <Button fx:id="getCourse" alignment="CENTER" layoutX="112.0" layoutY="41.0" mnemonicParsing="false" onAction="#fetchCourse" prefHeight="40.0" prefWidth="200.0" text="Show course" textAlignment="JUSTIFY">
+                                                   <font>
+                                                      <Font name="Roboto Regular" size="18.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="449.0" minHeight="10.0" prefHeight="381.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="449.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="1278.0" GridPane.rowIndex="1">
+                                   <children>
+                                       <TableView fx:id="studentTable" prefHeight="464.0" prefWidth="1280.0">
+                                           <columnResizePolicy>
+                                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                           </columnResizePolicy>
+                                       </TableView>
+                                   </children>
+                               </AnchorPane>
+                              <SplitPane dividerPositions="0.5023510971786834" prefHeight="160.0" prefWidth="200.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="527.0">
+                                       <children>
+                                           <Text fx:id="studentCourseName" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select either a student or a course, then click a button to the right.">
+                                               <font>
+                                                   <Font name="Roboto Regular" size="18.0" />
+                                               </font>
+                                           </Text>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                           <Text fx:id="total" layoutX="13.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                               <font>
+                                                   <Font name="Roboto Regular" size="18.0" />
+                                               </font>
+                                           </Text>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </GridPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+       <Tab text="Add student to course">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <children>
+                       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="719.0" prefWidth="1280.0">
+                           <items>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                   <children>
+                                       <GridPane prefHeight="357.0" prefWidth="1280.0">
+                                           <columnConstraints>
+                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                           </columnConstraints>
+                                           <rowConstraints>
+                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                           </rowConstraints>
+                                           <children>
+                                               <TextField fx:id="grade" maxWidth="350.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                               <Label text="Grade" GridPane.columnIndex="2">
+                                                   <font>
+                                                       <Font name="Roboto Regular" size="24.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                       <Insets bottom="60.0" left="35.0" />
+                                                   </GridPane.margin>
+                                               </Label>
+                                               <Label text="Student">
+                                                   <font>
+                                                       <Font name="Roboto Regular" size="24.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                       <Insets bottom="60.0" left="35.0" />
+                                                   </GridPane.margin>
+                                               </Label>
+                                               <ComboBox fx:id="studentsList" onAction="#updateCourse" prefWidth="350.0" GridPane.halignment="CENTER" />
+                                               <Label text="Course" GridPane.columnIndex="1">
+                                                   <font>
+                                                       <Font name="Roboto Regular" size="24.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                       <Insets bottom="60.0" left="35.0" />
+                                                   </GridPane.margin>
+                                               </Label>
+                                               <ComboBox fx:id="coursesList" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                           </children>
+                                       </GridPane>
+                                   </children>
+                               </AnchorPane>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                   <children>
+                                       <Button fx:id="studentCourse" layoutX="514.0" layoutY="14.0" mnemonicParsing="false" onAction="#addStudentToCourse" prefHeight="40.0" prefWidth="250.0" text="Add student to course">
+                                           <font>
+                                               <Font name="Roboto Regular" size="18.0" />
+                                           </font>
+                                       </Button>
+                                   </children>
+                               </AnchorPane>
+                           </items>
+                       </SplitPane>
+                   </children>
+               </AnchorPane>
+           </content>
+       </Tab>
+       <Tab text="Edit student grade">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.4898989898989899" orientation="VERTICAL" prefHeight="720.0" prefWidth="1280.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane prefHeight="357.0" prefWidth="1280.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <TextField fx:id="courseGradeEdit" maxWidth="350.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                                    <Label text="Grade" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="Roboto Regular" size="24.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="60.0" left="35.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Student">
+                                       <font>
+                                          <Font name="Roboto Regular" size="24.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="60.0" left="35.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="studentGradeList" onAction="#updateCourse" prefWidth="350.0" GridPane.halignment="CENTER" />
+                                    <Label text="Course" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Roboto Regular" size="24.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="60.0" left="35.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="courseGradeList" onAction="#getStudentGrade" prefWidth="350.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" onDragDetected="#updateCourse" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Button fx:id="studentGradeEdit" layoutX="514.0" layoutY="14.0" mnemonicParsing="false" onAction="#editStudentGrade" prefHeight="40.0" prefWidth="250.0" text="Update grade">
+                                 <font>
+                                    <Font name="Roboto Regular" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+           </content>
+       </Tab>
+       <Tab text="Create Student">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <children>
+                       <GridPane prefHeight="721.0" prefWidth="1280.0">
+                           <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="332.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="527.0" minWidth="10.0" prefWidth="527.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="370.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                               <TextField fx:id="studentName" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets left="30.0" right="30.0" top="150.0" />
+                                   </GridPane.margin>
+                               </TextField>
+                               <TextField fx:id="studentCity" layoutX="40.0" layoutY="60.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                                   <GridPane.margin>
+                                       <Insets bottom="50.0" left="30.0" right="30.0" />
+                                   </GridPane.margin>
+                               </TextField>
+                               <Button fx:id="createStudent" mnemonicParsing="false" onAction="#createStudent" prefHeight="48.0" prefWidth="188.0" text="Create Student" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets />
+                                   </GridPane.margin>
+                                   <font>
+                                       <Font name="Roboto Regular" size="18.0" />
+                                   </font>
+                               </Button>
+                               <Label text="Student Name" GridPane.columnIndex="1">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                               <Label layoutX="398.0" layoutY="126.0" text="Student City" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="80.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                           </children>
+                       </GridPane>
+                   </children></AnchorPane>
+           </content>
+       </Tab>
+       <Tab text="Create Course">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <children>
+                       <GridPane prefHeight="721.0" prefWidth="1280.0">
+                           <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="350.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="527.0" minWidth="10.0" prefWidth="527.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="350.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                               <TextField fx:id="createCourseName" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets left="30.0" right="30.0" top="150.0" />
+                                   </GridPane.margin>
+                               </TextField>
+                               <Button fx:id="createCourse" mnemonicParsing="false" onAction="#createCourse" prefHeight="48.0" prefWidth="188.0" text="Create Student" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets />
+                                   </GridPane.margin>
+                                   <font>
+                                       <Font name="Roboto Regular" size="18.0" />
+                                   </font>
+                               </Button>
+                               <Label text="Course Name">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                               <Label layoutX="398.0" layoutY="126.0" text="Semester" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                               <ComboBox fx:id="semesterList" prefWidth="467.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets left="30.0" top="150.0" />
+                                   </GridPane.margin>
+                               </ComboBox>
+                               <Label text="Teacher" GridPane.columnIndex="2">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="40.0" />
+                                   </GridPane.margin>
+                               </Label>
+                               <ComboBox fx:id="teacherList" prefWidth="298.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets top="150.0" />
+                                   </GridPane.margin>
+                               </ComboBox>
+                           </children>
+                       </GridPane>
+                   </children>
+               </AnchorPane>
+           </content>
+       </Tab>
+       <Tab text="Create Semester">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <children>
+                       <GridPane prefHeight="721.0" prefWidth="1280.0">
+                           <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="332.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="527.0" minWidth="10.0" prefWidth="527.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="370.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                               <TextField fx:id="semesterNameField" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets left="30.0" right="30.0" top="150.0" />
+                                   </GridPane.margin>
+                               </TextField>
+                               <Button fx:id="createSemester" mnemonicParsing="false" onAction="#createSemester" prefHeight="48.0" prefWidth="188.0" text="Create Semester" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                                   <GridPane.margin>
+                                       <Insets />
+                                   </GridPane.margin>
+                                   <font>
+                                       <Font name="Roboto Regular" size="18.0" />
+                                   </font>
+                               </Button>
+                               <Label text="Semester Name" GridPane.columnIndex="1">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                           </children>
+                       </GridPane>
+                   </children>
+               </AnchorPane>
+           </content>
+       </Tab>
+       <Tab text="Create Teacher">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <children>
+                       <GridPane prefHeight="721.0" prefWidth="1280.0">
+                           <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="332.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="527.0" minWidth="10.0" prefWidth="527.0" />
+                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="370.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                               <TextField fx:id="teacherName" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                   <GridPane.margin>
+                                       <Insets left="30.0" right="30.0" top="150.0" />
+                                   </GridPane.margin>
+                               </TextField>
+                               <Button fx:id="createTacher" mnemonicParsing="false" onAction="#createTeacher" prefHeight="48.0" prefWidth="188.0" text="Create Teacher" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                                   <GridPane.margin>
+                                       <Insets />
+                                   </GridPane.margin>
+                                   <font>
+                                       <Font name="Roboto Regular" size="18.0" />
+                                   </font>
+                               </Button>
+                               <Label text="Teacher Name" GridPane.columnIndex="1">
+                                   <font>
+                                       <Font name="Roboto Regular" size="24.0" />
+                                   </font>
+                                   <GridPane.margin>
+                                       <Insets bottom="100.0" left="30.0" />
+                                   </GridPane.margin>
+                               </Label>
+                           </children>
+                       </GridPane>
+                   </children>
+               </AnchorPane>
+           </content>
+       </Tab>
+   </tabs>
+</TabPane>
