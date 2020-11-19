@@ -232,7 +232,7 @@ public class Controller {
             ResultSet CRrs = CR.getCourses();
             ObservableList<Course> CRData = FXCollections.observableArrayList();
             while (CRrs != null && CRrs.next()) {
-                CRData.addAll(new Course(CRrs.getString(2), CRrs.getInt(1), CRrs.getInt(3), CRrs.getInt(4), CRrs.getString(8), CRrs.getString(6)));
+                CRData.addAll(new Course(CRrs.getString(2), CRrs.getInt(1), CRrs.getInt(3), CRrs.getInt(5), CRrs.getString(4), CRrs.getString(6)));
 
             }
             courses.getItems().addAll(CRData);

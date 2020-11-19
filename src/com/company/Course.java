@@ -63,7 +63,7 @@ public class Course {
     }
 
     public ResultSet getCourses() throws SQLException{
-        sql = "SELECT * FROM 'Course' INNER JOIN Semester ON Course.semesterId = Semester.id INNER JOIN Teacher ON Course.teacherId = Teacher.id;";
+        sql = "SELECT Course.id, Course.name, Teacher.id, Teacher.name, Semester.id, Semester.name FROM 'Course' INNER JOIN Semester ON Course.semesterId = Semester.id INNER JOIN Teacher ON Course.teacherId = Teacher.id;";
         ResultSet rs = stmt.executeQuery(sql);
         if(rs==null) {
             System.out.println("No records");
