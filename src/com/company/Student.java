@@ -72,18 +72,13 @@ public class Student {
     }
 
     public void createStudentCourse(String grade, Integer studentId, Integer courseId) throws SQLException {
-            sql = "INSERT INTO 'studentCourse' ('grade', 'studentId', 'courseId') VALUES ('" + grade + "', '" + studentId + "', '" + courseId +"')";
+            if(grade.isEmpty()){grade = "NULL";}
+            sql = "INSERT INTO 'studentCourse' ('grade', 'studentId', 'courseId') VALUES (" + grade + ", '" + studentId + "', '" + courseId +"')";
             stmt.executeUpdate(sql);
             sql = "";
             System.out.println("Inserted student");
     }
 
-    public void createStudentCourseNoGrade(Integer studentId, Integer courseId) throws SQLException {
-            sql = "INSERT INTO 'studentCourse' ('studentId', 'courseId') VALUES ('" + studentId + "', '" + courseId + "')";
-            stmt.executeUpdate(sql);
-            sql = "";
-            System.out.println("Inserted student");
-    }
 
     public ResultSet getSingleStudent(Integer id) throws SQLException {
             sql = "SELECT Student.name, Student.city, ifnull(studentCourse.grade, 'Not given'), Course.name, Semester.name, Teacher.name, AVG(studentCourse.grade) OVER() AS avgGrade, studentCourse.studentId, studentCourse.courseId, course.semesterId, course.teacherId\n" +
@@ -93,6 +88,7 @@ public class Student {
                     "    INNER JOIN Semester ON Course.semesterId = Semester.id\n" +
                     "    INNER JOIN Teacher on Teacher.id = Course.teacherId\n" +
                     "WHERE studentCourse.studentId = " + id;
+
             ResultSet rs = stmt.executeQuery(sql);
             if (rs == null) {
                 System.out.println("No records");
@@ -103,13 +99,15 @@ public class Student {
     }
 
     public ResultSet getStudents() throws SQLException{
-            sql = "SELECT * FROM 'Student';";
+            sql = "SELECT * FROM Student";
+        Connect("jdbc:sqlite:student.sqlite");
+        createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             if (rs == null) {
                 System.out.println("No records");
             }
             sql = "";
-        return rs;
+            return rs;
 
     }
 

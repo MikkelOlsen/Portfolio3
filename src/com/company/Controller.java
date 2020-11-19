@@ -1,5 +1,6 @@
 package com.company;
 
+//Import all relevant libraries.
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,8 +13,11 @@ import javafx.scene.text.Text;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
+
+    //Initialize all JavaFX elements
     public Button getStudent;
     public Button getCourse;
 
@@ -46,6 +50,13 @@ public class Controller {
 
     String url = "jdbc:sqlite:student.sqlite";
 
+    /*
+    This method fetches the information/students & grade for the overview tab from database based on the selected option in the dropdown.
+    After this is makes a table in the visual interface by using JavaFX.
+    Lastly it loops through all the courses that the student has attended and makes a table row for each of them, displaying the relevant information
+
+    The average grade of the student is calculated in the SQL query itself.
+     */
     public void fetchStudent(ActionEvent actionEvent) throws SQLException {
         try {
             SH.Connect(url);
@@ -84,6 +95,13 @@ public class Controller {
         }
     }
 
+    /*
+    This method fetches the information/students & grade for the overview tab from database based on the selected option in the dropdown.
+    After this is makes a table in the visual interface by using JavaFX.
+    Lastly it loops through all the students that are assigned to the course and makes a table row for each of them displaying the relevant information.
+
+    The average grade of the course is calculated in the SQL query itself.
+     */
     public void fetchCourse(ActionEvent actionEvent) throws SQLException {
         try {
             CR.Connect(url);
@@ -130,15 +148,15 @@ public class Controller {
 
     }
 
+    /*
+    This method adds an entry to the studentCourse table, which means that a student is now registered for the given course.
+    It checks whether or not the user has filled in a grade or not in the createStudentCourse method, if they haven't a null value will be put into the grade column instead of an integer.
+     */
     public void addStudentToCourse(ActionEvent actionEvent) throws SQLException {
         try {
             SH.Connect(url);
             SH.createStatement();
-            if(!grade.getText().isEmpty()) {
-                SH.createStudentCourse(grade.getText(), studentsList.getValue().getId(), coursesList.getValue().getId());
-            } else {
-                SH.createStudentCourseNoGrade(studentsList.getValue().getId(), coursesList.getValue().getId());
-            }
+            SH.createStudentCourse(grade.getText(), studentsList.getValue().getId(), coursesList.getValue().getId());
             setData();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -153,6 +171,7 @@ public class Controller {
         }
     }
 
+    //Method for inserting a student into the database
     public void createStudent(ActionEvent actionEvent) throws SQLException {
 
         try {
@@ -175,6 +194,7 @@ public class Controller {
         }
     }
 
+    // Method for inserting a course into the database
     public void createCourse(ActionEvent actionEvent) throws SQLException {
 
         try {
@@ -196,20 +216,22 @@ public class Controller {
         }
     }
 
-
+    //Method for setting data in all dropdowns
     public void setData() throws SQLException {
         try {
+            //Establish connections from the different classes to the database
             SH.Connect(url);
             CR.Connect(url);
             SEM.Connect(url);
             TH.Connect(url);
 
+            //Create the statements for all classes
             SH.createStatement();
             CR.createStatement();
             SEM.createStatement();
             TH.createStatement();
 
-
+            //Clear the dropdowns of old information (needed for when the method is called upon insertion of new data)
             students.getItems().clear();
             studentsList.getItems().clear();
             studentGradeList.getItems().clear();
@@ -220,6 +242,14 @@ public class Controller {
             teacherList.getItems().clear();
 
 
+            /*
+            The functionalities here repeat.
+            Get all the relevant data from the class relating to the table in the database.
+            Then create an observable list of class objects to contain this data (used for showing the name of the data row on the frontend
+            and accessing the ID in the backend.
+            Then initialize and add the new class objects to the observable list.
+            Prepend the information to the relevant dropdown menus.
+             */
             ResultSet SHrs = SH.getStudents();
             ObservableList<Student> SHData = FXCollections.observableArrayList();
             while (SHrs != null && SHrs.next()) {
@@ -268,7 +298,7 @@ public class Controller {
         }
     }
 
-
+    //Method for inserting a semester into the database.
     public void createSemester(ActionEvent actionEvent) throws SQLException {
 
         try {
@@ -290,6 +320,7 @@ public class Controller {
         }
     }
 
+    //Method for inserting a teacher into the database
     public void createTeacher(ActionEvent actionEvent) throws SQLException {
 
         try {
@@ -311,6 +342,7 @@ public class Controller {
         }
     }
 
+    //Method for updating an existing student's grade on a course they are already on.
     public void editStudentGrade(ActionEvent actionEvent) throws SQLException {
 
         try {
@@ -331,6 +363,13 @@ public class Controller {
         }
     }
 
+    /*
+    This method is used for filtering the course dropdown menus when a student is selected (add to course and edit grade).
+    It does so by first checking the id of the dropdown that were used.
+    Depending on which dropdown it was, it runs a method that either gets all the courses that a student is or isn't already tied to.
+    The purpose is that the user should not be able to edit the grade for a student on a course they did not attend, and likewise
+    should not be able to add a student to a course that they are already on.
+     */
     public void updateCourse(ActionEvent actionEvent) throws SQLException {
         try {
             CR.Connect(url);
@@ -375,6 +414,11 @@ public class Controller {
 
     }
 
+    /*
+    This method is used when the user selects a course on the edit grade page.
+    It fetches the selected student grade for the selected course.
+    This is set to show "Not given" if the grade is null in the database via the SQL query.
+     */
     public void getStudentGrade(ActionEvent actionEvent) throws SQLException{
         try {
             SH.Connect(url);
